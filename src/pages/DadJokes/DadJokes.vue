@@ -4,12 +4,14 @@ import { ref } from 'vue';
 const joke = ref('');
 const config = {
   headers: {
-    Accept: 'application/json',
-  },
+    Accept: 'application/json'
+  }
 };
 
 const fetchJoke = async () => {
-  const data = await fetch('https://icanhazdadjoke.com', config).then((r) => r.json());
+  const data = await fetch('https://icanhazdadjoke.com', config).then((r) =>
+    r.json()
+  );
   joke.value = data.joke;
 };
 
@@ -41,12 +43,14 @@ fetchJoke();
     justify-content: center;
     background-color: #686de0;
     padding: 20px;
+
     h3 {
       margin: 0;
       opacity: 0.5;
       letter-spacing: 2px;
     }
   }
+
   &-inner {
     width: 100%;
     display: flex;
@@ -56,9 +60,9 @@ fetchJoke();
     background-color: #fff;
     padding: 50px 20px;
     max-width: 800px;
-    width: 100%;
     border-radius: 10px;
   }
+
   &-view {
     text-align: center;
     margin: 50px auto;
@@ -68,6 +72,7 @@ fetchJoke();
     max-width: 600px;
     font-weight: 500;
   }
+
   &-btn {
     background-color: #9f68e0;
     border: none;
@@ -78,9 +83,11 @@ fetchJoke();
     border-radius: 10px;
     font-size: 16px;
     transition: all 0.2s ease-in-out;
+
     &:active {
       transform: scale(0.98);
     }
+
     span {
       color: #fff;
     }

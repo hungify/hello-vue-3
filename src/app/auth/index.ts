@@ -7,14 +7,14 @@ const { storage } = useLocalStorage('auth', {}, true);
 
 const initialAuth: AuthState = {
   ...storage,
-  isAuthenticated: !!storage?.accessToken,
+  isAuthenticated: !!storage?.accessToken
 };
 
 const authStore: AuthStore = reactive({
   auth: {
     ...initialAuth,
-    ...authActions,
-  },
+    ...authActions
+  }
 });
 
 export default authStore;

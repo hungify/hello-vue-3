@@ -28,8 +28,8 @@ a:hover {
 }
 
 body {
-  background: rgb(255, 255, 255);
-  color: rgb(54, 53, 55);
+  background: rgb(255 255 255);
+  color: rgb(54 53 55);
   transition: all 0.5s linear 0s;
 }
 
@@ -64,6 +64,7 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
+
   :root {
     color: #213547;
     background-color: #fff;

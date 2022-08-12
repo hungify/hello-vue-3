@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import LayoutVertical from './layouts/LayoutVertical.vue';
+import Grand from './components/Grand.vue';
+import Form from './components/Form.vue';
 
 const layout = computed(() => {
   return LayoutVertical;
@@ -11,6 +13,8 @@ const layout = computed(() => {
   <component :is="layout">
     <router-view />
   </component>
+  <Grand />
+  <Form />
 </template>
 
 <style>
@@ -18,6 +22,7 @@ const layout = computed(() => {
 .scale-leave-active {
   transition: all 0.5s ease;
 }
+
 .scale-enter-from,
 .scale-leave-to {
   opacity: 0;

@@ -1,23 +1,32 @@
-import type { Roles } from '~/configs/auth';
-
-interface User {
-  id: string;
-  // name: string;
-  // email: string;
-}
+import type { SUBJECTS } from '~/configs/auth';
+import type { ACTIONS, ROLES } from '~/configs/auth';
 
 export interface AuthState {
   accessToken: string;
-  // refreshToken: string;
   isAuthenticated: boolean;
-  user: User | null;
-  roles: Roles[];
+  role: Roles;
 }
 
-export type FetchLogin<Args> = (args: Args, cb: () => void) => void;
+export interface User {
+  email: string;
+  role?: Roles;
+  id?: string;
+  name?: string;
+}
+
+// export type UserLogin = Pick<User, 'email' | 'password'>;
+export type UserLogin = Pick<User, 'email'>;
+
+export type UserRegister = Omit<User, 'id' | 'isAuthenticated'>;
+
+export type Roles = keyof typeof ROLES;
+
+export type Actions = keyof typeof ACTIONS;
+
+export type Subjects = keyof typeof SUBJECTS;
 
 export interface AuthActions {
-  fetchLogin: ({ username }: { username: string }, cb: () => void) => void;
+  fetchLogin: (user: UserLogin) => void;
   fetchLogout: () => void;
 }
 

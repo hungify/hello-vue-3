@@ -1,16 +1,15 @@
-import type { Auth } from '~/interfaces/auth';
+import type { AuthState, Roles, UserLogin } from '~/interfaces/auth';
 
-type AuthToResponse = Omit<Auth, 'isAuthenticated'>;
-export const login = async (user: string) => {
-  return new Promise<AuthToResponse>((resolve, reject) => {
+export const login = async ({ email }: UserLogin) => {
+  type LoginResponse = Omit<AuthState, 'isAuthenticated'>;
+
+  return new Promise<LoginResponse>((resolve, reject) => {
     setTimeout(() => {
-      if (user === 'abc') {
+      if (['admin', 'editor', 'subscriber'].includes(email)) {
+        const upperFirstLetter = email.charAt(0).toUpperCase() + email.slice(1);
         return resolve({
-          accessToken: 'abc',
-          roles: ['admin'],
-          user: {
-            id: '1',
-          },
+          accessToken: '123214sdk',
+          role: upperFirstLetter as Roles
         });
       } else {
         return reject({ message: 'Invalid user and password' });

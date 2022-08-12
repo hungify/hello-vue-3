@@ -1,20 +1,21 @@
-import { reactive, toRefs } from 'vue';
+import { reactive } from 'vue';
 import type { Store } from '~/interfaces/store';
 import authStore from './auth';
 import todosStore from './todos';
 
 const errorStore = reactive({
   error: {
-    message: '',
-  },
+    message: ''
+  }
 });
 
-const globalStore: Store = reactive({
-  ...toRefs(errorStore),
-  ...toRefs(authStore),
-  ...toRefs(todosStore),
-});
-
-const useGlobalStore = () => globalStore;
+const useGlobalStore = () => {
+  const globalStore: Store = reactive({
+    ...errorStore,
+    ...authStore,
+    ...todosStore
+  });
+  return globalStore;
+};
 
 export default useGlobalStore;

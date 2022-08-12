@@ -7,21 +7,21 @@ const initialTodos: TodosState = {
     {
       id: '1',
       title: 'Learn Vue',
-      completed: false,
+      completed: false
     },
     {
       id: '2',
       title: 'Learn Vuex',
-      completed: false,
-    },
-  ],
+      completed: false
+    }
+  ]
 };
 
 const todosStore: TodosStore = reactive({
   todos: {
     ...initialTodos,
-    ...todoActions,
-  },
+    ...todoActions
+  }
 });
 
 export default todosStore;

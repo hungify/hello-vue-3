@@ -1,37 +1,45 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import useGlobalStore from '~/app/store';
-const router = useRouter();
 
 const user = ref('');
-const {
-  error,
-  auth: { fetchLogin },
-} = useGlobalStore();
+const { error, auth } = useGlobalStore();
+const router = useRouter();
+
+watch(auth, (auth) => {
+  if (auth.isAuthenticated) {
+    router.push('/');
+  }
+});
 
 const handleLogin = () => {
-  fetchLogin({ username: user.value }, () => {
-    router.push({
-      name: 'profile',
-      params: {
-        id: '1',
-      },
-      state: {
-        id: '2',
-      },
-    });
+  auth.fetchLogin({
+    email: user.value
   });
-
   user.value = '';
+};
+
+const handleLogout = () => {
+  auth.fetchLogout();
+  router.push('/login');
 };
 </script>
 
 <template>
-  <h3 v-show="error.message">{{ error.message }}</h3>
-  <input v-model="user" type="text" />
+  <div v-if="auth.isAuthenticated">
+    <h1>You are logged in as role {{ auth.role }}</h1>
+    <button @click="handleLogout">Logout</button>
+  </div>
+  <div v-else>
+    <h3 v-show="error.message">{{ error.message }}</h3>
+    <div>type admin to login as admin</div>
+    <div>type editor to login as editor</div>
+    <div>type subscriber to login as subscriber</div>
+    <input v-model="user" type="text" />
 
-  <button @click="handleLogin">Login</button>
+    <button @click="handleLogin">Login</button>
+  </div>
 </template>
 
 <style scoped>

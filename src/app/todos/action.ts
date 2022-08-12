@@ -25,5 +25,5 @@ export const completedTodo = (id: string) => {
 export const todoActions = {
   addTodo,
   removeTodo,
-  completedTodo,
+  completedTodo
 };

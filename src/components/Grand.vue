@@ -1,25 +1,29 @@
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue';
+import { ref } from 'vue';
 import Parent from './Parent.vue';
 
-const abc = ref('abc');
-const f = reactive({
-  a: {
-    b: {
-      c: 1,
-    },
-  },
-});
+const arr = ref([
+  { id: 0, msg: 'hello' },
+  { id: 1, msg: 'world' },
+  { id: 2, msg: 'bye' },
+  { id: 3, msg: 'abc' }
+]);
 
-console.log('hel');
+const activeId = ref(0);
 
-
+const click = () => (activeId.value += 1);
 </script>
 
 <template>
   <ul className="bg-white">
-    <h1>{{ f }}</h1>
+    <h1>{{ arr }}</h1>
     <br />
-    <Parent :abc="abc" :f="f" />
+    <button @click="click">Next</button>
+    <Parent
+      v-for="item in arr"
+      :key="item.msg"
+      :active-id="activeId === item.id"
+      :msg="item.msg"
+    />
   </ul>
 </template>

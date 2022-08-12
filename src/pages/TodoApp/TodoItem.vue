@@ -20,7 +20,9 @@ const props = withDefaults(defineProps<TodoItemProps>(), {});
 
 // const emit = defineEmits<TodoItemEmits>();
 
-const { handleTodoClick, handleTodoDoubleClick } = inject('todoActions') as TodoActions;
+const { handleTodoClick, handleTodoDoubleClick } = inject(
+  'todoActions'
+) as TodoActions;
 
 const { completed, id, title } = toRefs(props.todo);
 </script>
@@ -29,7 +31,7 @@ const { completed, id, title } = toRefs(props.todo);
   <li
     class="px-8 py-4 outline-1 outline-teal-500 text-2xl border-t-2 border-gray-300"
     :class="{
-      'text-[#b6b6b6] line-through': completed,
+      'text-[#b6b6b6] line-through': completed
     }"
     @contextmenu.prevent
     @click.left="() => handleTodoClick(id, 'left')"

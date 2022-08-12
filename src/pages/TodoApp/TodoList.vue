@@ -17,7 +17,9 @@ const emit = defineEmits<TodoListEmits>();
       v-for="todo in todos.list"
       :key="todo.id"
       :todo="todo"
-      @on-todo-click="(id, mousePosition) => emit('onTodoClick', id, mousePosition)"
+      @on-todo-click="
+        (id, mousePosition) => emit('onTodoClick', id, mousePosition)
+      "
       @on-todo-double-click="(id, text) => emit('onTodoDoubleClick', id, text)"
     />
   </ul>

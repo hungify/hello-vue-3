@@ -7,8 +7,8 @@ const gotoHome = () => {
   router.push({
     name: 'home',
     params: {
-      msg: 'he',
-    },
+      msg: 'he'
+    }
   });
 };
 </script>
@@ -22,10 +22,14 @@ const gotoHome = () => {
             <button class="nav-link" @click="gotoHome">Home</button>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'dadJokes' }" class="nav-link">Dad jokes</router-link>
+            <router-link :to="{ name: 'dadJokes' }" class="nav-link"
+              >Dad jokes</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'todoApp' }" class="nav-link">Todo App</router-link>
+            <router-link :to="{ name: 'todoApp' }" class="nav-link"
+              >Todo App</router-link
+            >
           </li>
         </ul>
       </div>

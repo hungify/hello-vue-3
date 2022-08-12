@@ -29,6 +29,16 @@ const handleLogout = () => {
 
   <br />
 
+  <router-link :to="{ name: 'admin' }"> Go to admin page </router-link>
+  <br />
+  <router-link :to="{ name: 'editor' }"> Go to editor page </router-link>
+  <br />
+  <router-link :to="{ name: 'subscriber' }">
+    Go to subscriber page
+  </router-link>
+  <br />
+
   <router-link :to="{ name: 'profile' }"> Go to profile </router-link>
+  <br />
   <router-view name="helper" />
 </template>

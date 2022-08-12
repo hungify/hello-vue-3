@@ -48,7 +48,7 @@
     "experimentalDecorators": true,
     "incremental": true,
     "baseUrl": ".",
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "paths": {
       "~/*": ["src/*"]
     }
