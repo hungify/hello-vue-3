@@ -10,6 +10,9 @@ export default defineConfig({
       '~': `${path.resolve(__dirname, './src')}`,
     },
   },
+  css: {
+    devSourcemap: true,
+  },
   server: {
     port: 3000,
   },
