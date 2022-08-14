@@ -2,11 +2,11 @@ import { useLocalStorage } from '~/composables/useLocalStorage';
 import { ROLES } from '~/configs/auth';
 import type { UserLogin } from '~/interfaces/auth';
 import { login } from '~/services/auth';
-
+import { initialAuth } from '.';
 import useGlobalStore from '../store';
 
 export async function fetchLogin(userData: UserLogin) {
-  const { set } = useLocalStorage('auth', {}, true);
+  const authStorage = useLocalStorage('auth', initialAuth);
   const { auth, error } = useGlobalStore();
   try {
     const { accessToken, role } = await login(userData);
@@ -14,7 +14,10 @@ export async function fetchLogin(userData: UserLogin) {
       auth.isAuthenticated = true;
       auth.accessToken = accessToken;
       auth.role = role;
-      set(JSON.stringify({ accessToken, role }));
+      authStorage.value = {
+        accessToken,
+        role
+      };
     } else {
       error.message = 'Invalid username or password';
     }
@@ -25,12 +28,12 @@ export async function fetchLogin(userData: UserLogin) {
 }
 
 export const fetchLogout = () => {
-  const { remove } = useLocalStorage('auth', {}, true);
+  const authStorage = useLocalStorage('auth');
   const { auth } = useGlobalStore();
   auth.accessToken = '';
   auth.role = ROLES.Guest;
   auth.isAuthenticated = false;
-  remove();
+  authStorage.value = null;
 };
 
 const authActions = {

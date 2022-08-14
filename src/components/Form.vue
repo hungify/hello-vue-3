@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import VInput from './VInput.vue';
-const value = ref('');
+import Props from './Props.vue';
+import VModel from './VModel.vue';
+import TreeView from './TreeView.vue';
 </script>
 
 <template>
-  <VInput v-model.capitalize="value" type="text" />
-  {{ value }}
+  <div>
+    <Props variant="ghost" />
+    <VModel />
+    <TreeView />
+  </div>
 </template>

@@ -12,14 +12,15 @@ const value = computed({
     return props.modelValue;
   },
   set(val) {
+    console.log(val);
     emit('update:modelValue', upperFirstWord(val));
   }
 });
 
-function upperFirstWord(str: string) {
+const upperFirstWord = (str: string) => {
   if (!props.modelModifiers.capitalize) return str;
   return str.replace(/\w/, (v) => v.toUpperCase());
-}
+};
 </script>
 
 <template>
