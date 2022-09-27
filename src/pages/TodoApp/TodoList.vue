@@ -1,27 +1,40 @@
 <script lang="ts" setup>
 import useGlobalStore from '~/app/store';
-import TodoItem from './TodoItem.vue';
-
-interface TodoListEmits {
-  (eventName: 'onTodoClick', id: string, mousePosition: 'left' | 'right'): void;
-  (eventName: 'onTodoDoubleClick', id: string, title: string): void;
-}
 
 const { todos } = useGlobalStore();
-const emit = defineEmits<TodoListEmits>();
+
+const handleTodoClick = (id: string, mousePosition: 'left' | 'right') => {
+  if (mousePosition === 'left') {
+    todos.completedTodo(id);
+  } else {
+    todos.removeTodo(id);
+  }
+};
+const handleTodoDoubleClick = (id: string, title: string) => {
+  const foundTodo = todos.list.find((todo) => todo.id === id);
+  if (foundTodo) foundTodo.title = title;
+};
+
+const handleAddTodo = (evt: Event) => {
+  const formData = new FormData(evt.target as HTMLFormElement);
+  todos.addTodo({
+    id: String(new Date().getTime()),
+    title: formData.get('title') as string,
+    completed: false,
+  });
+};
+
+// provide('todoActions', {
+//   handleTodoClick,
+//   handleTodoDoubleClick,
+// });
 </script>
 
 <template>
-  <ul className="bg-white">
-    <TodoItem
-      v-for="todo in todos.list"
-      :key="todo.id"
-      :todo="todo"
-      @on-todo-click="(id, mousePosition) => emit('onTodoClick', id, mousePosition)"
-      @on-todo-double-click="(id, text) => emit('onTodoDoubleClick', id, text)"
-    />
-  </ul>
+  <slot
+    :todos="todos.list"
+    :onTodoClick="handleTodoClick"
+    :onTodoDoubleClick="handleTodoDoubleClick"
+    :onAddTodo="handleAddTodo"
+  />
 </template>
-
-<!-- @on-todo-click="(id, mousePosition) => emit('onTodoClick', id, mousePosition)"
-      @on-todo-double-click="(id, text) => emit('onTodoDoubleClick', id, text)" -->

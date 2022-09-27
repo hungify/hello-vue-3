@@ -1,26 +1,23 @@
 <script lang="ts" setup>
-import { inject, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import type { Todo } from '~/interfaces/todo';
 
 interface TodoItemProps {
   todo: Todo;
 }
 
-// interface TodoItemEmits {
-//   (eventName: 'onTodoClick', id: string, mousePosition: 'left' | 'right'): void;
-//   (eventName: 'onTodoDoubleClick', id: string, title: string): void;
-// }
-
-interface TodoActions {
-  handleTodoClick: (id: string, mousePosition: 'left' | 'right') => void;
-  handleTodoDoubleClick: (id: string, title: string) => void;
+interface TodoItemEmits {
+  (eventName: 'onTodoClick', id: string, mousePosition: 'left' | 'right'): void;
+  (eventName: 'onTodoDoubleClick', id: string, title: string): void;
 }
 
 const props = withDefaults(defineProps<TodoItemProps>(), {});
 
-// const emit = defineEmits<TodoItemEmits>();
+const emit = defineEmits<TodoItemEmits>();
 
-const { handleTodoClick, handleTodoDoubleClick } = inject('todoActions') as TodoActions;
+// const { handleTodoClick, handleTodoDoubleClick } = inject(
+//   'todoActions',
+// ) as TodosActions;
 
 const { completed, id, title } = toRefs(props.todo);
 </script>
@@ -32,9 +29,9 @@ const { completed, id, title } = toRefs(props.todo);
       'text-[#b6b6b6] line-through': completed,
     }"
     @contextmenu.prevent
-    @click.left="() => handleTodoClick(id, 'left')"
-    @click.right="() => handleTodoClick(id, 'right')"
-    @dblclick="() => handleTodoDoubleClick(id, title)"
+    @click.left="() => emit('onTodoClick', id, 'left')"
+    @click.right="() => emit('onTodoClick', id, 'right')"
+    @dblclick="() => emit('onTodoDoubleClick', id, title)"
   >
     {{ title }}
   </li>

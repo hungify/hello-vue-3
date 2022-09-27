@@ -1,6 +1,6 @@
-import type { Auth } from '~/interfaces/auth';
+import type { AuthState } from '~/interfaces/auth';
 
-type AuthToResponse = Omit<Auth, 'isAuthenticated'>;
+type AuthToResponse = Omit<AuthState, 'isAuthenticated'>;
 export const login = async (user: string) => {
   return new Promise<AuthToResponse>((resolve, reject) => {
     setTimeout(() => {

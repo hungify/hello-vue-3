@@ -64,13 +64,7 @@ module.exports = {
     'vue/no-mutating-props': 0,
     'vue/script-setup-uses-vars': 'error',
     // https://eslint.vuejs.org/rules/v-on-event-hyphenation.html
-    'vue/v-on-event-hyphenation': [
-      'warn',
-      'always',
-      {
-        autofix: true,
-      },
-    ],
+    'vue/v-on-event-hyphenation': ['never', { ignore: ['custom-prop'] }],
     'vue/html-self-closing': [
       'error',
       {
